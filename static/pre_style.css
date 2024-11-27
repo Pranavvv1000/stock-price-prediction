@@ -1,0 +1,138 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f4f7fc;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+header {
+    background-color: #000000FF;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+.logo-image {
+    height: 50px; /* Adjust height as needed */
+    width: auto; /* Maintain aspect ratio */
+    margin-right: 10px; /* Add spacing between logo and text */
+
+}
+.container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+h1, h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.stock-info {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-bottom: 40px;
+}
+
+.stock-info p {
+    font-size: 1rem;
+    margin: 10px 0;
+    line-height: 1.6;
+}
+
+.predictions {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.prediction-item {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.prediction-item h3 {
+    margin-top: 0;
+    font-size: 1.25rem;
+}
+
+.prediction-item p {
+    font-size: 1rem;
+    margin: 5px 0;
+}
+
+iframe {
+    width: 100%;
+    height: 600px;
+    border: none;
+    margin-top: 20px;
+    border-radius: 10px;
+}
+
+.back-button {
+    display: block;
+    text-align: center;
+    margin-top: 30px;
+    font-size: 1rem;
+    color: #2c3e50;
+    text-decoration: none;
+    padding: 10px 20px;
+    border: 1px solid #2c3e50;
+    border-radius: 5px;
+    background-color: #ecf0f1;
+    transition: all 0.3s ease;
+}
+
+.back-button:hover {
+    background-color: #2c3e50;
+    color: white;
+    border-color: transparent;
+}
+
+.chart-container {
+    margin-top: 40px;
+}
+
+/* Media Queries for Mobile Responsiveness */
+@media (max-width: 768px) {
+    .predictions {
+        grid-template-columns: 1fr;
+    }
+
+    header {
+        padding: 15px;
+    }
+
+    .container {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    h2 {
+        font-size: 1.25rem;
+    }
+}
+
+a{
+    text-decoration:none;
+}
+#sp1{
+color:blue;
+}
+
+#sp2{
+    color: rgb(209, 0, 0);
+}

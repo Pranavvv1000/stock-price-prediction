@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Price Predictions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/pre_style.css">
+</head>
+<body>
+    <header>
+        <img src="/static/removebg.png" alt="Logo" class="logo-image">
+        <h1>Stock Price Predictions for {{ ticker.upper() }}</h1>
+    </header>
+
+    <div class="container">
+        <h2>Today's Live Price: <span style="color: #27ae60;">{{ live_price }}</span></h2>
+
+        <div class="chart-container">
+            <h3>Stock Price Chart for the Last Year</h3>
+            <div>
+                {{ chart_html | safe }}
+            </div>
+        </div>
+        <!-- Stock Information Section -->
+        <div class="stock-info">
+            <h3>Stock Information:</h3>
+            <p><strong>P/E Ratio:</strong> {{ stock_info['P/E Ratio'] }}</p>
+            <p><strong>Market Cap:</strong> {{ stock_info['Market Cap'] }}</p>
+            <p><strong>Beta:</strong> {{ stock_info['Beta'] }}</p>
+            <p><strong>Dividend Yield:</strong> {{ stock_info['Dividend Yield'] }}</p>
+            <p><strong>50 Day Moving Average:</strong> {{ stock_info['50 Day Moving Average'] }}</p>
+            <p><strong>200 Day Moving Average:</strong> {{ stock_info['200 Day Moving Average'] }}</p>
+            <p><strong>Previous Close:</strong> {{ stock_info['Previous Close'] }}</p>
+            <p><strong>52 Week High:</strong> {{ stock_info['52 Week High'] }}</p>
+            <p><strong>52 Week Low:</strong> {{ stock_info['52 Week Low'] }}</p>
+        </div>
+
+        <!-- Predictions Section -->
+        <div class="predictions">
+            <h3>Predicted Prices and Trends:</h3>
+            {% for period, price in predictions.items() %}
+                <div class="prediction-item">
+                    <h3>{{ period }}</h3>
+                    <p><strong>Predicted Price:</strong> <span id="sp1">{{ price }}<span></p>
+                    <p><strong>Trend:</strong><span id="sp2"> {{ trends[period] }}<span></p>
+                </div>
+            {% endfor %}
+        </div>
+
+        <!-- Stock Price Chart Section -->
+        
+
+        <div class="back-button">
+            <a href="/">Back to Home</a>
+        </div>
+    </div>
+</body>
+</html>

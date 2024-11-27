@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StockIQ</title>
+    <link rel="stylesheet" href="/static/style.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Genova&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <img src="/static/removebg.png" alt="Logo" class="logo-image">
+            
+            <nav>
+                <ul>
+                    <li><b><a href="#" class="active">Home</a></b></li>
+                    <li><b><a href="/about">About</a></b></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <main>
+        <div class="container">
+            <div style=" display: flex; ">
+            <div class="box" id="nifty50">
+                <h2>NIFTY 50</h2>
+                <p id="nifty50-price">Loading...</p>
+                <p id="nifty50-change" class="change">Loading...</p>
+            </div>
+            <div class="box" id="niftybank">
+                <h2>NIFTY BANK</h2>
+                <p id="niftybank-price">Loading...</p>
+                <p id="niftybank-change" class="change">Loading...</p>
+            </div>
+            <div class="box" id="sensex">
+                <h2>SENSEX</h2>
+                <p id="sensex-price">Loading...</p>
+                <p id="sensex-change" class="change">Loading...</p>
+            </div>
+        </div>
+        <form method="POST" action="/predict">
+            <input type="text" class="input-box" placeholder="Enter stock symbol" id="ticker" name="ticker" />
+            <button class="btn-predict" type="submit">Analyse & Predict</button>
+        </form>
+        </div>
+    </main>
+    <footer>
+        <!-- Add any footer content if needed -->
+    </footer>
+    <script>
+        // Simulate a stock prediction function
+function predictStock() {
+    const stockSymbol = document.querySelector('.input-box').value;
+    if (!stockSymbol) {
+        alert('Please enter a stock symbol!');
+        return;
+    }
+    alert(`Prediction for ${stockSymbol} will be shown here.`);
+}
+// Function to fetch live prices and changes
+async function fetchPrices() {
+    try {
+        const response = await fetch('/prices');
+        const data = await response.json();
+
+        // Log response for debugging
+        console.log("Stock Prices Response:", data);
+
+        const formatChange = (change) => {
+            if (change === "No Change") return "No Change";
+            if (change === "N/A") return "N/A";
+            return `${change >= 0 ? '+' : ''}${change}`;
+        };
+
+        const applyChangeStyle = (elementId, change) => {
+            const element = document.getElementById(elementId);
+            if (change === "No Change" || change === "N/A") {
+                element.style.color = "gray"; // Neutral color for no change or unavailable data
+            } else if (change >= 0) {
+                element.style.color = "green"; // Profit
+            } else {
+                element.style.color = "red"; // Loss
+            }
+        };
+
+        // Update Nifty 50
+        document.getElementById('nifty50-price').textContent = `₹ ${data.nifty50.price}`;
+        document.getElementById('nifty50-change').textContent = formatChange(data.nifty50.change);
+        applyChangeStyle('nifty50-change', data.nifty50.change);
+
+        // Update Nifty Bank
+        document.getElementById('niftybank-price').textContent = `₹ ${data.niftybank.price}`;
+        document.getElementById('niftybank-change').textContent = formatChange(data.niftybank.change);
+        applyChangeStyle('niftybank-change', data.niftybank.change);
+
+        // Update Sensex
+        document.getElementById('sensex-price').textContent = `₹ ${data.sensex.price}`;
+        document.getElementById('sensex-change').textContent = formatChange(data.sensex.change);
+        applyChangeStyle('sensex-change', data.sensex.change);
+    } catch (error) {
+        console.error('Error fetching prices:', error);
+    }
+}
+
+// Fetch prices every 5 seconds
+setInterval(fetchPrices, 1000);
+fetchPrices();
+
+
+    </script>
+</body>
+</html>
